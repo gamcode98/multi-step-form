@@ -1,7 +1,11 @@
 import { useFormik } from 'formik'
+import { useContext } from 'react'
 import * as Yup from 'yup'
+import { AppContext } from '../context/AppContext'
 
 function Step1() {
+  const { currentStep, handleCurrentStep } = useContext(AppContext)
+
   const initialValues = () => {
     return {
       name: '',
@@ -36,12 +40,13 @@ function Step1() {
     validationSchema: Yup.object(validationSchema()),
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2))
+      handleCurrentStep(2)
     },
   })
 
   return (
-    <form onSubmit={formik.handleSubmit} className='w-full lg:border'>
-      <div className='bg-white rounded-lg w-[95%] mx-auto p-6 h-96 -translate-y-16 md:w-8/12 lg:translate-y-0'>
+    <form onSubmit={formik.handleSubmit} className='w-full'>
+      <div className='bg-white rounded-lg w-[95%] mx-auto p-6 -translate-y-16 md:w-8/12 lg:translate-y-0 lg:px-0'>
         <h1 className='font-bold text-marine-blue text-2xl mb-2'>
           Personal info
         </h1>
@@ -147,10 +152,10 @@ function Step1() {
       </div>
       <div className='bg-white'>
         <div className='flex justify-between w-[95%] mx-auto py-2 md:w-8/12'>
-          <button className=''>Go Back</button>
+          {currentStep !== 1 && <button className=''>Go Back</button>}
           <button
             type='submit'
-            className='bg-marine-blue rounded text-white font-bold p-2'
+            className='bg-marine-blue rounded text-white font-bold p-2 ml-auto'
           >
             Next Step
           </button>

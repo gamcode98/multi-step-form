@@ -3,9 +3,9 @@ import StepButton from './StepButton'
 
 function StepsButtons() {
   return (
-    <div className='flex justify-center gap-4 pt-8'>
-      {steps.map((step, index) => (
-        <StepButton key={index} step={step} />
+    <div className='flex justify-center gap-4 pt-8 lg:h-full lg:flex-col lg:justify-start'>
+      {steps.map((step) => (
+        <StepButton key={step.id} step={step} />
       ))}
     </div>
   )
