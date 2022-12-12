@@ -1,6 +1,6 @@
 import { useContext } from 'react'
-import { AppContext } from '../context/AppContext'
-import { IStep } from '../interfaces/IStep'
+import { AppContext } from '../../context/AppContext'
+import { IStep } from '../../interfaces/IStep'
 
 function StepButton({ step }: { step: IStep }) {
   const { currentStep } = useContext(AppContext)

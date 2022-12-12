@@ -1,4 +1,4 @@
-import { plans } from '../utils/plans'
+import { plans } from '../../utils/plans'
 import Plan from './Plan'
 
 function Plans() {

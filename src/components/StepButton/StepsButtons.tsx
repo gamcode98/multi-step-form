@@ -1,4 +1,4 @@
-import { steps } from '../utils/steps'
+import { steps } from '../../utils/steps'
 import StepButton from './StepButton'
 
 function StepsButtons() {

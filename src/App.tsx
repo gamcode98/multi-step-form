@@ -1,7 +1,7 @@
 import { useContext } from 'react'
-import Step1 from './components/Step1'
-import Step2 from './components/Step2'
-import StepsButtons from './components/StepsButtons'
+import Step1 from './components/Step/Step1'
+import Step2 from './components/Step/Step2'
+import StepsButtons from './components/StepButton/StepsButtons'
 import { AppContext } from './context/AppContext'
 
 function App() {

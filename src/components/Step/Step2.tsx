@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react'
-import { AppContext } from '../context/AppContext'
-import Plans from './Plans'
+import { AppContext } from '../../context/AppContext'
+import Plans from '../Plan/Plans'
 import { Field, Form, Formik, useField, useFormik } from 'formik'
-import { PlanContext, PlanProvider } from '../context/PlanContext'
+import { PlanContext, PlanProvider } from '../../context/PlanContext'
 
 function Step2() {
   const { currentStep } = useContext(AppContext)

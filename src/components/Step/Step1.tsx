@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import { useContext } from 'react'
 import * as Yup from 'yup'
-import { AppContext } from '../context/AppContext'
+import { AppContext } from '../../context/AppContext'
 
 function Step1() {
   const { currentStep, handleCurrentStep } = useContext(AppContext)

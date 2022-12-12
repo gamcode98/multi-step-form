@@ -1,6 +1,6 @@
 import { useFormikContext } from 'formik'
-import { IFormikValues } from '../interfaces/IFormikValues'
-import { IPlan } from '../interfaces/IPlan'
+import { IFormikValues } from '../../interfaces/IFormikValues'
+import { IPlan } from '../../interfaces/IPlan'
 
 function Plan({ plan }: { plan: IPlan }) {
   const { values, handleChange } = useFormikContext<IFormikValues>()
