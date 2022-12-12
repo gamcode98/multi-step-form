@@ -13,6 +13,7 @@ function App() {
         <div className='bg-sidebar-mobile bg-cover w-full h-40 md:bg-center lg:bg-sidebar-desktop lg:bg-cover lg:bg-no-repeat lg:h-full lg:w-1/3 lg:rounded-lg'>
           <StepsButtons />
         </div>
+
         {currentStep === 1 && <Step1 />}
         {currentStep === 2 && <Step2 />}
       </div>

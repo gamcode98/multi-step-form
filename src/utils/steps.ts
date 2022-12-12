@@ -1,4 +1,6 @@
-export const steps = [
+import { IStep } from '../interfaces/IStep'
+
+export const steps: IStep[] = [
   {
     id: crypto.randomUUID(),
     numberStep: 1,
