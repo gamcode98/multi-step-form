@@ -1,167 +1,121 @@
-import { useFormik } from 'formik'
-import { useContext } from 'react'
-import * as Yup from 'yup'
-import { AppContext } from '../../context/AppContext'
+import { useFormikContext } from 'formik'
+import { IFormikValues } from '../../interfaces/IFormikValues'
 
 function Step1() {
-  const { currentStep, handleCurrentStep } = useContext(AppContext)
+  const { values, handleChange, handleBlur, touched, errors } =
+    useFormikContext<IFormikValues>()
 
-  const initialValues = () => {
-    return {
-      name: '',
-      email: '',
-      phoneNumber: '',
-    }
-  }
-
-  const validationSchema = () => {
-    return {
-      name: Yup.string()
-        .required('This field is required')
-        .min(1, 'Too Short!')
-        .max(50, 'Too Long!')
-        .matches(/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/, 'Just letters and whitespace'),
-      email: Yup.string()
-        .required('This field is required')
-        .matches(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/, 'No matches found'),
-      phoneNumber: Yup.string()
-        .required('This field is required')
-        .min(1, 'Too Short!')
-        .max(12, 'Too Long!')
-        .matches(
-          /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
-          'No matches found'
-        ),
-    }
-  }
-
-  const formik = useFormik({
-    initialValues: initialValues(),
-    validationSchema: Yup.object(validationSchema()),
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2))
-      handleCurrentStep(2)
-    },
-  })
+  // const formik = useFormik({
+  //   initialValues: initialValues(),
+  //   validationSchema: Yup.object(validationSchema()),
+  //   onSubmit: (values) => {
+  //     alert(JSON.stringify(values, null, 2))
+  //     handleCurrentStep(2)
+  //   },
+  // })
 
   return (
-    <form onSubmit={formik.handleSubmit} className='w-full'>
-      <div className='bg-white rounded-lg w-[95%] mx-auto p-6 -translate-y-16 md:w-8/12 lg:translate-y-0 lg:px-0'>
-        <h1 className='font-bold text-marine-blue text-2xl mb-2'>
-          Personal info
-        </h1>
-        <p className='text-cool-gray mb-4'>
-          Please provide your name, email address, and phone number.
-        </p>
+    <div className='bg-white rounded-lg w-[95%] mx-auto p-6 -translate-y-16 md:w-8/12 lg:translate-y-0 lg:px-0'>
+      <h1 className='font-bold text-marine-blue text-2xl mb-2'>
+        Personal info
+      </h1>
+      <p className='text-cool-gray mb-4'>
+        Please provide your name, email address, and phone number.
+      </p>
 
-        <div className='flex justify-between'>
-          <label htmlFor='name' className='block text-sm text-marine-blue'>
-            Name
-          </label>
+      <div className='flex justify-between'>
+        <label htmlFor='name' className='block text-sm text-marine-blue'>
+          Name
+        </label>
 
-          {formik.touched.name && formik.errors.name ? (
-            <span className='text-strawberry-red text-sm font-bold'>
-              {formik.errors.name}
-            </span>
-          ) : null}
-        </div>
-        <input
-          type='text'
-          placeholder='e.g Stephen King'
-          id='name'
-          className={`border rounded border-light-gray block w-full px-4 py-2 mb-4 placeholder:font-bold focus:border-cool-gray focus:outline-none
+        {touched.name && errors.name ? (
+          <span className='text-strawberry-red text-sm font-bold'>
+            {errors.name}
+          </span>
+        ) : null}
+      </div>
+      <input
+        type='text'
+        placeholder='e.g Stephen King'
+        id='name'
+        className={`border rounded border-light-gray block w-full px-4 py-2 mb-4 placeholder:font-bold focus:border-cool-gray focus:outline-none
             ${
-              formik.touched.name && formik.errors.name
+              touched.name && errors.name
                 ? 'border-strawberry-red'
                 : 'border-light-gray'
             } 
             ${
-              formik.touched.name && !formik.errors.name
+              touched.name && !errors.name
                 ? 'border-marine-blue'
                 : 'border-light-gray'
             }
             `}
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          value={formik.values.name}
-        />
+        onBlur={handleBlur}
+        onChange={handleChange}
+        value={values.name}
+      />
 
-        <div className='flex justify-between'>
-          <label htmlFor='email' className='block text-sm text-marine-blue'>
-            Email Address
-          </label>
-          {formik.touched.email && formik.errors.email ? (
-            <span className='text-strawberry-red text-sm font-bold'>
-              {formik.errors.email}
-            </span>
-          ) : null}
-        </div>
-        <input
-          type='email'
-          name='email'
-          id='email'
-          placeholder='e.g stephenking@lorem.com'
-          className={`border rounded border-light-gray block w-full px-4 py-2 mb-4 placeholder:font-bold focus:border-cool-gray focus:outline-none 
+      <div className='flex justify-between'>
+        <label htmlFor='email' className='block text-sm text-marine-blue'>
+          Email Address
+        </label>
+        {touched.email && errors.email ? (
+          <span className='text-strawberry-red text-sm font-bold'>
+            {errors.email}
+          </span>
+        ) : null}
+      </div>
+      <input
+        type='email'
+        name='email'
+        id='email'
+        placeholder='e.g stephenking@lorem.com'
+        className={`border rounded border-light-gray block w-full px-4 py-2 mb-4 placeholder:font-bold focus:border-cool-gray focus:outline-none 
             ${
-              formik.touched.email && formik.errors.email
+              touched.email && errors.email
                 ? 'border-strawberry-red'
                 : 'border-light-gray'
             } 
             ${
-              formik.touched.email && !formik.errors.email
+              touched.email && !errors.email
                 ? 'border-marine-blue'
                 : 'border-light-gray'
             }`}
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          value={formik.values.email}
-        />
-        <div className='flex justify-between'>
-          <label
-            htmlFor='phoneNumber'
-            className='block text-sm text-marine-blue'
-          >
-            Phone Number
-          </label>
-          {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
-            <div className='text-strawberry-red text-sm font-bold'>
-              {formik.errors.phoneNumber}
-            </div>
-          ) : null}
-        </div>
-        <input
-          type='tel'
-          placeholder='e.g +1 234 567 890'
-          id='phoneNumber'
-          className={`border rounded border-light-gray block w-full px-4 py-2 mb-4 placeholder:font-bold focus:border-cool-gray focus:outline-none
+        onBlur={handleBlur}
+        onChange={handleChange}
+        value={values.email}
+      />
+      <div className='flex justify-between'>
+        <label htmlFor='phoneNumber' className='block text-sm text-marine-blue'>
+          Phone Number
+        </label>
+        {touched.phoneNumber && errors.phoneNumber ? (
+          <div className='text-strawberry-red text-sm font-bold'>
+            {errors.phoneNumber}
+          </div>
+        ) : null}
+      </div>
+      <input
+        type='tel'
+        placeholder='e.g +1 234 567 890'
+        id='phoneNumber'
+        className={`border rounded border-light-gray block w-full px-4 py-2 mb-4 placeholder:font-bold focus:border-cool-gray focus:outline-none
             ${
-              formik.touched.phoneNumber && formik.errors.phoneNumber
+              touched.phoneNumber && errors.phoneNumber
                 ? 'border-strawberry-red'
                 : 'border-light-gray'
             } 
             ${
-              formik.touched.phoneNumber && !formik.errors.phoneNumber
+              touched.phoneNumber && !errors.phoneNumber
                 ? 'border-marine-blue'
                 : 'border-light-gray'
             }
             `}
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          value={formik.values.phoneNumber}
-        />
-      </div>
-      <div className='bg-white'>
-        <div className='flex justify-between w-[95%] mx-auto py-2 md:w-8/12'>
-          {currentStep !== 1 && <button className=''>Go Back</button>}
-          <button
-            type='submit'
-            className='bg-marine-blue rounded text-white font-bold p-2 ml-auto'
-          >
-            Next Step
-          </button>
-        </div>
-      </div>
-    </form>
+        onBlur={handleBlur}
+        onChange={handleChange}
+        value={values.phoneNumber}
+      />
+    </div>
   )
 }
 
