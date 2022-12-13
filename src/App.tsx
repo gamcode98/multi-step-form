@@ -6,22 +6,38 @@ import StepsButtons from './components/StepButton/StepsButtons'
 import { AppContext } from './context/AppContext'
 import * as Yup from 'yup'
 import StepNavigation from './components/StepNavigation/StepNavigation'
+import { PlanContext } from './context/PlanContext'
+import Step3 from './components/Step/Step3'
+import Step4 from './components/Step/Step4'
 
 function App() {
   const { currentStep } = useContext(AppContext)
-
-  // const initialValues = () => {
-  //   return {
-  //     kindOfPlan: false,
-  //     // plan: selectedPlan,
-  //   }
-  // }
+  const { selectedPlan } = useContext(PlanContext)
 
   const initialValues = () => {
     return {
       name: '',
       email: '',
       phoneNumber: '',
+      kindOfPlan: false,
+      plan: selectedPlan,
+      // plan: [],
+      complements: [
+        // {
+        //   id: 'asdas',
+        //   name: 'prueba1',
+        //   description: 'algo mas',
+        //   priceByMonth: '$9/mo',
+        //   priceByYear: '$190/yr',
+        // },
+        // {
+        //   id: 'popas',
+        //   name: 'prueba2',
+        //   description: 'algo mas',
+        //   priceByMonth: '$8/mo',
+        //   priceByYear: '$180/yr',
+        // },
+      ],
     }
   }
 
@@ -49,6 +65,8 @@ function App() {
   const STEPS: any = {
     1: <Step1 />,
     2: <Step2 />,
+    3: <Step3 />,
+    4: <Step4 />,
   }
 
   return (
@@ -66,8 +84,9 @@ function App() {
           }}
         >
           {(formik) => (
-            <form onSubmit={formik.handleSubmit}>
+            <form onSubmit={formik.handleSubmit} className='w-full'>
               {STEPS[currentStep] || <Step1 />}
+              {/* {STEPS[2] || <Step1 />} */}
               <StepNavigation />
             </form>
           )}

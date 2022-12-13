@@ -24,11 +24,15 @@ function Plan({ plan }: { plan: IPlan }) {
           <p className='font-bold'>{plan.name}</p>
           {values.kindOfPlan ? (
             <>
-              <p className='text-cool-gray font-medium'>{plan.priceByYear}</p>
+              <p className='text-cool-gray font-medium'>
+                ${plan.priceByYear}/yr
+              </p>
               <p className='text-marine-blue font-medium'>2 months free</p>
             </>
           ) : (
-            <p className='text-cool-gray font-medium'>{plan.priceByMonth}</p>
+            <p className='text-cool-gray font-medium'>
+              ${plan.priceByMonth}/mo
+            </p>
           )}
         </div>
       </div>

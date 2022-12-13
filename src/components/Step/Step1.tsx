@@ -5,15 +5,6 @@ function Step1() {
   const { values, handleChange, handleBlur, touched, errors } =
     useFormikContext<IFormikValues>()
 
-  // const formik = useFormik({
-  //   initialValues: initialValues(),
-  //   validationSchema: Yup.object(validationSchema()),
-  //   onSubmit: (values) => {
-  //     alert(JSON.stringify(values, null, 2))
-  //     handleCurrentStep(2)
-  //   },
-  // })
-
   return (
     <div className='bg-white rounded-lg w-[95%] mx-auto p-6 -translate-y-16 md:w-8/12 lg:translate-y-0 lg:px-0'>
       <h1 className='font-bold text-marine-blue text-2xl mb-2'>
