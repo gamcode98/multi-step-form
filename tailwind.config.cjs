@@ -24,8 +24,8 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
-        'sidebar-mobile': "url('src/assets/images/bg-sidebar-mobile.svg')",
-        'sidebar-desktop': "url('src/assets/images/bg-sidebar-desktop.svg')",
+        'sidebar-mobile': "url('/assets/images/bg-sidebar-mobile.svg')",
+        'sidebar-desktop': "url('/assets/images/bg-sidebar-desktop.svg')",
       },
     },
   },
