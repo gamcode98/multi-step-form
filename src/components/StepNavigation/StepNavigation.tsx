@@ -16,7 +16,10 @@ function StepNavigation() {
       ? handleCurrentStep(currentStep + 1)
       : submitForm()
 
-    console.log({ values })
+    // console.log({ values })
+
+    // let temp = { ...values, plan: JSON.parse(values.plan) }
+    // console.log(temp)
   }
 
   return (

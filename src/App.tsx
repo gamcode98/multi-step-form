@@ -2,13 +2,13 @@ import { Formik } from 'formik'
 import { useContext } from 'react'
 import Step1 from './components/Step/Step1'
 import Step2 from './components/Step/Step2'
-import StepsButtons from './components/StepButton/StepsButtons'
-import { AppContext } from './context/AppContext'
-import * as Yup from 'yup'
-import StepNavigation from './components/StepNavigation/StepNavigation'
-import { PlanContext } from './context/PlanContext'
 import Step3 from './components/Step/Step3'
 import Step4 from './components/Step/Step4'
+import StepsButtons from './components/StepButton/StepsButtons'
+import StepNavigation from './components/StepNavigation/StepNavigation'
+import { PlanContext } from './context/PlanContext'
+import { AppContext } from './context/AppContext'
+import * as Yup from 'yup'
 
 function App() {
   const { currentStep } = useContext(AppContext)
@@ -21,23 +21,7 @@ function App() {
       phoneNumber: '',
       kindOfPlan: false,
       plan: selectedPlan,
-      // plan: [],
-      complements: [
-        // {
-        //   id: 'asdas',
-        //   name: 'prueba1',
-        //   description: 'algo mas',
-        //   priceByMonth: '$9/mo',
-        //   priceByYear: '$190/yr',
-        // },
-        // {
-        //   id: 'popas',
-        //   name: 'prueba2',
-        //   description: 'algo mas',
-        //   priceByMonth: '$8/mo',
-        //   priceByYear: '$180/yr',
-        // },
-      ],
+      complements: [],
     }
   }
 
@@ -86,7 +70,7 @@ function App() {
           {(formik) => (
             <form onSubmit={formik.handleSubmit} className='w-full'>
               {STEPS[currentStep] || <Step1 />}
-              {/* {STEPS[2] || <Step1 />} */}
+              {/* {STEPS[3] || <Step1 />} */}
               <StepNavigation />
             </form>
           )}

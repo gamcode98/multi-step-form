@@ -3,19 +3,28 @@ import { IFormikValues } from '../../interfaces/IFormikValues'
 import { IPlan } from '../../interfaces/IPlan'
 
 function Plan({ plan }: { plan: IPlan }) {
-  const { values, handleChange } = useFormikContext<IFormikValues>()
+  const { values, setFieldValue } = useFormikContext<IFormikValues>()
+
+  // const parsedPlan = `{"name": "${plan.name}", "priceByMonth": ${plan.priceByMonth}, "priceByYear": ${plan.priceByYear}}`
 
   return (
     <label htmlFor={plan.id} className='w-full lg:hover:cursor-pointer'>
       <input
         type='radio'
         name='plan'
-        value={plan.name}
+        // value={parsedPlan}
         id={plan.id}
         className='peer/plan hidden'
-        onChange={handleChange}
-        checked={values.plan === plan.name}
+        onChange={() => {
+          setFieldValue('plan', {
+            name: plan.name,
+            priceByMonth: plan.priceByMonth,
+            priceByYear: plan.priceByYear,
+          })
+        }}
+        checked={values.plan.name === plan.name}
       />
+
       <div
         className={`flex items-center gap-4 border border-light-gray p-4 rounded-md peer-checked/plan:border-purplish-blue peer-checked/plan:bg-magnolia mb-4 lg:flex-col lg:items-start`}
       >
