@@ -1,18 +1,18 @@
 import { Formik } from 'formik'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import Step1 from './components/Step/Step1'
 import Step2 from './components/Step/Step2'
 import Step3 from './components/Step/Step3'
 import Step4 from './components/Step/Step4'
-import StepsButtons from './components/StepButton/StepsButtons'
 import StepNavigation from './components/StepNavigation/StepNavigation'
-import { PlanContext } from './context/PlanContext'
 import { AppContext } from './context/AppContext'
 import * as Yup from 'yup'
+import Step5 from './components/Step/Step5'
+import Steps from './components/Steps/Steps'
 
 function App() {
-  const { currentStep } = useContext(AppContext)
-  const { selectedPlan } = useContext(PlanContext)
+  const { currentStep, selectedPlan } = useContext(AppContext)
+  const [finishStep, setFinishStep] = useState(false)
 
   const initialValues = () => {
     return {
@@ -55,26 +55,27 @@ function App() {
 
   return (
     <div className='bg-magnolia lg:h-screen lg:flex lg:items-center lg:justify-center'>
-      <div className='max-h-full lg:flex lg:bg-white lg:w-3/4 lg:h-5/6 lg:rounded-lg lg:p-4 lg:pr-0'>
+      <div className='max-h-full lg:flex lg:bg-white lg:w-3/4 lg:h-[500px] lg:rounded-lg lg:p-4 lg:pr-0'>
         <div className='bg-sidebar-mobile bg-cover w-full h-40 md:bg-center lg:bg-sidebar-desktop lg:bg-cover lg:bg-no-repeat lg:h-full lg:w-1/3 lg:rounded-lg'>
-          <StepsButtons />
+          <Steps />
         </div>
 
-        <Formik
-          initialValues={initialValues()}
-          validationSchema={Yup.object(validationSchema())}
-          onSubmit={(values) => {
-            alert(JSON.stringify(values, null, 2))
-          }}
-        >
-          {(formik) => (
-            <form onSubmit={formik.handleSubmit} className='w-full'>
-              {STEPS[currentStep] || <Step1 />}
-              {/* {STEPS[3] || <Step1 />} */}
-              <StepNavigation />
-            </form>
-          )}
-        </Formik>
+        {!finishStep ? (
+          <Formik
+            initialValues={initialValues()}
+            validationSchema={Yup.object(validationSchema())}
+            onSubmit={(values) => setFinishStep(true)}
+          >
+            {(formik) => (
+              <form onSubmit={formik.handleSubmit} className='w-full'>
+                {STEPS[currentStep] || <Step1 />}
+                <StepNavigation />
+              </form>
+            )}
+          </Formik>
+        ) : (
+          <Step5 />
+        )}
       </div>
     </div>
   )

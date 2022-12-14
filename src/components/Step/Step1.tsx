@@ -37,7 +37,7 @@ function Step1() {
             } 
             ${
               touched.name && !errors.name
-                ? 'border-marine-blue'
+                ? 'border-purplish-blue'
                 : 'border-light-gray'
             }
             `}
@@ -69,7 +69,7 @@ function Step1() {
             } 
             ${
               touched.email && !errors.email
-                ? 'border-marine-blue'
+                ? 'border-purplish-blue'
                 : 'border-light-gray'
             }`}
         onBlur={handleBlur}
@@ -98,7 +98,7 @@ function Step1() {
             } 
             ${
               touched.phoneNumber && !errors.phoneNumber
-                ? 'border-marine-blue'
+                ? 'border-purplish-blue'
                 : 'border-light-gray'
             }
             `}

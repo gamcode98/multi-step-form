@@ -26,8 +26,8 @@ function Complement({ complement }: { complement: IComplement }) {
         name='complements'
         className='accent-purplish-blue peer/complement absolute top-2/4 -translate-y-1/2 left-4'
         id={complement.id}
-        value={complement.name}
         onChange={() => handleComplement(complement.id, complement)}
+        checked={values.complements.some((item) => item.id === complement.id)}
       />
       <div className='flex items-center justify-between peer-checked/complement:bg-magnolia peer-checked/complement:border-purplish-blue p-4 border border-light-gray rounded-md'>
         <div className='ml-8'>

@@ -1,8 +1,11 @@
 import { useFormikContext } from 'formik'
+import { useContext } from 'react'
+import { AppContext } from '../../context/AppContext'
 import { IFormikValues } from '../../interfaces/IFormikValues'
 
 function Summary() {
   const { values } = useFormikContext<IFormikValues>()
+  const { handleCurrentStep } = useContext(AppContext)
 
   const getTotal = () => {
     const kindOfPrice = !values.kindOfPlan ? 'priceByMonth' : 'priceByYear'
@@ -26,9 +29,13 @@ function Summary() {
             <p className='text-marine-blue font-bold'>
               {values.plan.name} ({!values.kindOfPlan ? 'Monthly' : 'Yearly'})
             </p>
-            <span className='text-cool-gray relative after:absolute w-full after:left-0 after:right-0 after:bottom-0 after:border after:block'>
+            <button
+              type='button'
+              onClick={() => handleCurrentStep(2)}
+              className='text-cool-gray relative after:absolute after:left-0 after:right-0 after:bottom-1 after:border after:block'
+            >
               Change
-            </span>
+            </button>
           </div>
           <span className='text-marine-blue font-bold'>
             $

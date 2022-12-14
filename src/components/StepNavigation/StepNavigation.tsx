@@ -12,14 +12,9 @@ function StepNavigation() {
   const handleNextStep = () => {
     const found = Object.values(values).find((value) => value === '')
 
-    JSON.stringify(errors) === '{}' && found === undefined
+    JSON.stringify(errors) === '{}' && found === undefined && currentStep !== 4
       ? handleCurrentStep(currentStep + 1)
       : submitForm()
-
-    // console.log({ values })
-
-    // let temp = { ...values, plan: JSON.parse(values.plan) }
-    // console.log(temp)
   }
 
   return (
@@ -35,11 +30,13 @@ function StepNavigation() {
           </button>
         )}
         <button
-          type='button'
-          className='bg-marine-blue rounded text-white font-medium p-2 ml-auto'
+          type={currentStep > 4 ? 'submit' : 'button'}
+          className={`rounded text-white font-medium p-2 ml-auto ${
+            currentStep === 4 ? 'bg-purplish-blue' : 'bg-marine-blue'
+          }`}
           onClick={handleNextStep}
         >
-          Next Step
+          {currentStep === 4 ? 'Confirm' : 'Next Step'}
         </button>
       </div>
     </div>
