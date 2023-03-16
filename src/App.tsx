@@ -34,19 +34,19 @@ function App() {
         .matches(/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/, 'Just letters and whitespace'),
       email: Yup.string()
         .required('This field is required')
-        .matches(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/, 'No matches found'),
+        .matches(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/, 'Must be a valid email'),
       phoneNumber: Yup.string()
         .required('This field is required')
         .min(1, 'Too Short!')
         .max(12, 'Too Long!')
         .matches(
           /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
-          'No matches found'
+          'Must be a valid phone number'
         ),
     }
   }
 
-  const STEPS: any = {
+  const STEPS = {
     1: <Step1 />,
     2: <Step2 />,
     3: <Step3 />,
@@ -64,11 +64,11 @@ function App() {
           <Formik
             initialValues={initialValues()}
             validationSchema={Yup.object(validationSchema())}
-            onSubmit={(values) => setFinishStep(true)}
+            onSubmit={() => setFinishStep(true)}
           >
             {(formik) => (
               <form onSubmit={formik.handleSubmit} className='w-full'>
-                {STEPS[currentStep] || <Step1 />}
+                {STEPS[currentStep as keyof typeof STEPS] || <Step1 />}
                 <StepNavigation />
               </form>
             )}
